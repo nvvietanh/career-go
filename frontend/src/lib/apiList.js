@@ -1,4 +1,5 @@
-export const server = "http://localhost:5000";
+// export const server = "http://localhost:5000";
+export const server = "https://career-go-gtu4.vercel.app"
 
 const apiList = {
   login: `${server}/auth/login`,
