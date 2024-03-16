@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const passportConfig = require("./lib/passportConfig");
 const cors = require("cors");
 const fs = require("fs");
+const morgan = require("morgan");
 
 // MongoDB
 mongoose
@@ -33,6 +34,7 @@ const port = 5000;
 
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+app.use(morgan('dev'));
 
 // Setting up middlewares
 // app.use(cors(
@@ -51,6 +53,22 @@ app.use("/auth", require("./routes/authRoutes"));
 app.use("/api", require("./routes/apiRoutes"));
 app.use("/upload", require("./routes/uploadRoutes"));
 app.use("/host", require("./routes/downloadRoutes"));
+
+app.use((req, res, next) => {
+  const error = new Error('Not Found');
+  error.status = 404;
+  next(error);
+});
+
+app.use((error, req, res, next) => {
+  const statusCode = error.status = 500;
+  return res.status(statusCode).json({
+      status: 'error',
+      code: statusCode,
+      stack: error.stack,
+      message: error.message = 'Internal Server Error'
+  })
+});
 
 app.get("/", (req, res) => {
   res.send("API is running...");
