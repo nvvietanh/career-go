@@ -17,16 +17,16 @@ mongoose
   .then((res) => console.log("Connected to DB"))
   .catch((err) => console.log(err));
 
-// initialising directories
-if (!fs.existsSync("./public")) {
-  fs.mkdirSync("./public");
-}
-if (!fs.existsSync("./public/resume")) {
-  fs.mkdirSync("./public/resume");
-}
-if (!fs.existsSync("./public/profile")) {
-  fs.mkdirSync("./public/profile");
-}
+// initialising directories // no need anymore because of saving files on cloudinary
+// if (!fs.existsSync("./public")) {
+//   fs.mkdirSync("./public");
+// }
+// if (!fs.existsSync("./public/resume")) {
+//   fs.mkdirSync("./public/resume");
+// }
+// if (!fs.existsSync("./public/profile")) {
+//   fs.mkdirSync("./public/profile");
+// }
 
 const app = express();
 const port = 5000;

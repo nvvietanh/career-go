@@ -79,7 +79,7 @@ passport.use(
         })
         .catch((err) => {
           return done(err, false, {
-            message: "Token không chính xác",
+            message: "Token không đúng",
           });
         });
     }
